@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>InternSafe - Offer Analysis Result</title>
+  
+  <!-- Google Fonts: Material Symbols & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+  
+  <!-- Base styling -->
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed-dim": "#c3c0ff",
+            "on-tertiary-container": "#ffd4a4",
+            "on-background": "#131b2e",
+            "primary-fixed": "#e2dfff",
+            "on-tertiary-fixed-variant": "#653e00",
+            "primary-container": "#4f46e5",
+            "secondary-container": "#6cf8bb",
+            "surface-container-highest": "#dae2fd",
+            "surface-tint": "#4d44e3",
+            "on-secondary-fixed": "#002113",
+            "tertiary": "#684000",
+            "secondary": "#006c49",
+            "background": "#faf8ff",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#005236",
+            "on-primary-fixed-variant": "#3323cc",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#eaedff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#6ffbbe",
+            "on-surface": "#131b2e",
+            "tertiary-container": "#885500",
+            "tertiary-fixed-dim": "#ffb95f",
+            "inverse-surface": "#283044",
+            "on-primary-fixed": "#0f0069",
+            "surface-dim": "#d2d9f4",
+            "surface": "#faf8ff",
+            "on-error": "#ffffff",
+            "on-primary-container": "#dad7ff",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#e2e7ff",
+            "inverse-on-surface": "#eef0ff",
+            "error": "#ba1a1a",
+            "surface-bright": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "on-surface-variant": "#464555",
+            "tertiary-fixed": "#ffddb8",
+            "secondary-fixed-dim": "#4edea3",
+            "inverse-primary": "#c3c0ff",
+            "outline": "#777587",
+            "outline-variant": "#c7c4d8",
+            "primary": "#3525cd",
+            "on-secondary-container": "#00714d",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed": "#2a1700"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-2xl": "3rem"
+          },
+          fontFamily: {
+            "body-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-caps": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "title-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-lg-mobile": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface">
+  
+  <!-- Fixed Top Navigation Header -->
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between">
+      <div class="flex items-center gap-space-md">
+        <!-- Brand Icon & Name -->
+        <a href="/" class="flex items-center gap-space-xs cursor-pointer group">
+          <div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[22px]">shield</span>
+          </div>
+          <span class="font-title-md text-title-md text-primary font-bold">InternSafe</span>
+        </a>
+        <span class="hidden sm:inline-flex items-center gap-space-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps font-bold">
+          <span class="material-symbols-outlined text-[14px]">verified_user</span>INDIA
+        </span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-space-xs">
+        <a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="/">Analyzer</a>
+        <a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary font-label-lg font-semibold" href="#">Analysis Result</a>
+      </nav>
+
+      <div class="flex items-center gap-space-md">
+        <div class="hidden lg:flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-low border border-outline-variant/40">
+          <span class="material-symbols-outlined text-secondary text-[16px]">school</span>
+          <span class="font-label-md text-label-md text-on-surface-variant font-medium">Student Protection Initiative</span>
+        </div>
+        <a href="/" class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md text-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1 font-semibold">
+          <span class="material-symbols-outlined text-[16px]">search</span> New Scan
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Body Content -->
+  <main class="w-full pt-16 bg-surface">
+    <div class="flex flex-col w-full">
+      <div class="relative w-full overflow-hidden bg-gradient-to-b from-surface-container-high/40 via-surface to-surface pb-space-2xl">
+        
+        <!-- Decorative Ambient Glows -->
+        <div id="ambientGlow" class="pointer-events-none absolute top-0 right-1/4 h-96 w-96 rounded-full bg-error/5 blur-3xl"></div>
+        <div class="pointer-events-none absolute top-32 left-10 h-72 w-72 rounded-full bg-primary/5 blur-2xl"></div>
+
+        <div class="max-w-7xl mx-auto px-margin-mobile md:px-margin pt-space-lg flex flex-col gap-space-xl relative">
+          
+          <!-- Top Meta Navigation & Scan Info Bar -->
+          <section class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+            <div class="flex flex-col gap-space-xs">
+              <nav class="flex items-center gap-2 font-label-md text-label-md text-on-surface-variant">
+                <a class="hover:text-primary transition-colors flex items-center gap-1" href="/">
+                  <span class="material-symbols-outlined text-[16px]">home</span>Home
+                </a>
+                <span class="text-outline-variant">/</span>
+                <span class="text-primary font-semibold">Offer Analysis Result</span>
+                <span class="text-outline-variant">/</span>
+                <span class="text-outline font-mono" id="caseIdDisplay">CASE-#IN-84920</span>
+              </nav>
+
+              <div class="flex flex-wrap items-center gap-space-sm pt-1">
+                <span id="companyNameDisplay" class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                  TechGlobal Innovations Private Ltd
+                </span>
+                <span id="entityBadge" class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-caps text-label-caps font-bold">
+                  <span class="material-symbols-outlined text-[14px]">warning</span>UNVERIFIED ENTITY
+                </span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-space-sm self-start md:self-auto bg-surface-container-lowest shadow-sm px-space-md py-2 rounded-xl border border-outline-variant/30">
+              <span class="material-symbols-outlined text-secondary text-[18px]">history</span>
+              <div class="flex flex-col">
+                <span class="font-label-caps text-label-caps text-on-surface-variant tracking-wider uppercase">Verification Stamp</span>
+                <span id="verificationStampText" class="font-body-sm text-body-sm text-on-surface font-medium">
+                  Scanned just now • Real-time Heuristic Engine
+                </span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Main Verdict Hero Component -->
+          <section class="w-full bg-surface-container-lowest rounded-2xl shadow-xl overflow-hidden border border-outline-variant/30">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-0">
+              
+              <!-- Gauge & Score Visual Block -->
+              <div id="gaugeContainer" class="lg:col-span-4 p-space-xl bg-error-container/20 flex flex-col items-center justify-center text-center relative transition-colors duration-500">
+                <div class="relative w-48 h-48 flex items-center justify-center my-2">
+                  <!-- Radial Meter SVG -->
+                  <svg class="w-full h-full -rotate-90 transform" viewbox="0 0 120 120">
+                    <circle class="text-surface-container" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-width="10"></circle>
+                    <circle id="meterCircle" class="text-error transition-all duration-1000 ease-out" cx="60" cy="60" fill="transparent" r="50" stroke="currentColor" stroke-dasharray="314.159" stroke-dashoffset="37.7" stroke-linecap="round" stroke-width="10"></circle>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span id="meterRiskLabel" class="font-label-caps text-label-caps text-error font-bold uppercase tracking-widest">Risk Level</span>
+                    <span id="scoreNumber" class="font-display-lg text-display-lg text-error font-extrabold leading-none tracking-tighter">88</span>
+                    <span class="font-label-md text-label-md text-on-surface-variant font-medium">out of 100</span>
+                  </div>
+                </div>
+
+                <div id="verdictPill" class="mt-2 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-error text-on-error font-label-caps text-label-caps tracking-wider font-bold shadow-md shadow-error/20">
+                  <span class="material-symbols-outlined text-[15px]" id="verdictIcon">gpp_bad</span>
+                  <span id="verdictText">LIKELY SCAM (HIGH RISK)</span>
+                </div>
+
+                <!-- Genuine non-fake description -->
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-3 max-w-xs" id="gaugeSubtext">
+                  InternSafe Heuristic Audit: Pattern engine evaluating upfront fee extortion, unverified domains, and recruitment anomalies.
+                </p>
+              </div>
+
+              <!-- Score Narrative & Quick Triage -->
+              <div class="lg:col-span-8 p-space-xl flex flex-col justify-between gap-space-lg">
+                <div class="flex flex-col gap-space-sm">
+                  <div id="narrativeBadge" class="flex items-center gap-space-xs text-error font-label-caps text-label-caps uppercase tracking-wider font-bold">
+                    <span class="material-symbols-outlined text-[16px]">priority_high</span>
+                    <span id="narrativeBadgeText">Urgent Warning for Candidates</span>
+                  </div>
+                  <h1 id="verdictHeadline" class="font-headline-lg text-headline-lg text-on-surface font-extrabold leading-snug">
+                    Multiple high-severity red flags detected typical of fee-for-offer scams targeting college graduates.
+                  </h1>
+                  <p id="verdictSummary" class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    This recruiter communication demonstrates characteristics of fraudulent recruitment schemes: upfront fee demands, throwaway messaging channels, or zero technical screening.
+                  </p>
+                </div>
+
+                <!-- Key Metric Micro-Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-space-md">
+                  <!-- Stipend Metric -->
+                  <div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-1 border border-outline-variant/20">
+                    <span class="font-label-caps text-label-caps text-on-surface-variant">Stipend Claimed</span>
+                    <span id="metricStipend" class="font-title-md text-title-md text-on-surface font-bold">₹35,000 / mo</span>
+                    <span id="metricStipendSub" class="font-body-sm text-body-sm text-on-surface-variant">Evaluated offer rate</span>
+                  </div>
+
+                  <!-- Fee Metric -->
+                  <div id="feeMetricCard" class="bg-error-container/30 p-space-md rounded-xl flex flex-col gap-1 border border-error-container">
+                    <span class="font-label-caps text-label-caps text-error font-bold">Requested Deposit</span>
+                    <span id="metricFee" class="font-title-md text-title-md text-error font-extrabold">₹1,499 (UPI)</span>
+                    <span id="metricFeeSub" class="font-body-sm text-body-sm text-on-error-container">Upfront payment signal</span>
+                  </div>
+
+                  <!-- Recruiter Origin Metric -->
+                  <div class="bg-surface-container-low p-space-md rounded-xl flex flex-col gap-1 border border-outline-variant/20">
+                    <span class="font-label-caps text-label-caps text-on-surface-variant">Recruiter Origin</span>
+                    <span id="metricOrigin" class="font-title-md text-title-md text-on-surface font-bold">Personal Gmail</span>
+                    <span id="metricOriginSub" class="font-body-sm text-body-sm text-on-surface-variant">Sender communication channel</span>
+                  </div>
+                </div>
+
+                <!-- Dynamic Warning / Safe Callout Strip -->
+                <div id="calloutStrip" class="bg-error-container/40 rounded-xl p-space-md flex items-start gap-space-md border border-error/20">
+                  <span id="calloutIcon" class="material-symbols-outlined text-error text-[24px] mt-0.5">do_not_disturb_on</span>
+                  <div class="flex flex-col">
+                    <span id="calloutTitle" class="font-label-lg text-label-lg text-on-error-container font-bold">
+                      Do not transfer money via Google Pay, PhonePe, Paytm, or UPI
+                    </span>
+                    <span id="calloutDesc" class="font-body-sm text-body-sm text-on-surface-variant">
+                      Legitimate employers never solicit application fees, training deposits, ID charges, or laptop courier fees under Indian labor guidelines.
+                    </span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- Section 1 & Section 2 Split (Bento Grid) -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+            
+            <!-- Left: Red-Flag Dissections (7 Cols) -->
+            <div class="lg:col-span-7 flex flex-col gap-space-lg">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-error text-[22px]" id="flagSectionIcon">report</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold" id="flagsHeaderTitle">
+                    Why We Flagged This Offer
+                  </h2>
+                </div>
+                <span id="flagCountBadge" class="font-label-caps text-label-caps text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full font-semibold">
+                  0 Red Flags
+                </span>
+              </div>
+
+              <!-- Container where dynamic red flag cards are inserted -->
+              <div id="redFlagsContainer" class="flex flex-col gap-space-md">
+                <!-- Dynamically generated red flags will appear here -->
+              </div>
+            </div>
+
+            <!-- Right: Original Message Evidence Inspector (5 Cols) -->
+            <div class="lg:col-span-5 flex flex-col gap-space-md sticky top-20">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[20px]">find_in_page</span>
+                  <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">Flagged Evidence Audit</h2>
+                </div>
+                <span class="font-label-md text-label-md text-on-surface-variant font-mono">Input Inspector</span>
+              </div>
+
+              <!-- Chat-styled Raw Evidence Box -->
+              <div class="bg-surface-container-lowest rounded-2xl p-space-lg shadow-md border border-outline-variant/30 flex flex-col gap-space-md">
+                <div class="flex items-center justify-between pb-space-sm bg-surface-container-low -mx-space-lg -mt-space-lg px-space-lg pt-space-md rounded-t-2xl border-b border-outline-variant/20">
+                  <div class="flex items-center gap-space-sm">
+                    <div id="avatarInitials" class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs">
+                      IS
+                    </div>
+                    <div class="flex flex-col">
+                      <span id="evidenceSenderTitle" class="font-label-md text-label-md font-bold text-on-surface">
+                        Recruitment Communication
+                      </span>
+                      <span id="evidenceSenderSub" class="font-body-sm text-body-sm text-on-surface-variant font-mono text-[11px]">
+                        Submitted Text Analysis
+                      </span>
+                    </div>
+                  </div>
+                  <span class="material-symbols-outlined text-outline text-[18px]">verified</span>
+                </div>
+
+                <!-- Annotated Content Stream with Highlights -->
+                <div id="evidenceContentStream" class="font-body-md text-body-md text-on-surface leading-relaxed flex flex-col gap-3 font-mono text-[13px] bg-surface-container-low/50 p-space-md rounded-xl max-h-96 overflow-y-auto whitespace-pre-wrap">
+                  <!-- Analyzed text with highlighted matches will be inserted here -->
+                </div>
+
+                <!-- Legend Explanation -->
+                <div class="flex flex-col gap-2 pt-space-xs border-t border-outline-variant/20">
+                  <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Annotation Legend</span>
+                  <div class="flex flex-wrap gap-2 text-[11px]">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-red-100 text-error font-semibold">
+                      <span class="w-2 h-2 rounded-full bg-error"></span>High Hazard Phrase
+                    </span>
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-100 text-tertiary font-semibold">
+                      <span class="w-2 h-2 rounded-full bg-tertiary"></span>Manipulative Pattern
+                    </span>
+                  </div>
+                </div>
+
+                <div class="rounded-xl bg-surface-container p-space-sm flex items-center justify-between text-on-surface-variant">
+                  <span class="font-body-sm text-body-sm flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[16px] text-primary">fingerprint</span> Session Digest
+                  </span>
+                  <span class="font-mono text-xs text-outline" id="textDigest">f79a...91bc</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section 3: Student Action Plan (What you should do now) -->
+          <section class="w-full flex flex-col gap-space-lg mt-space-md">
+            <div class="flex flex-col gap-space-xs">
+              <div class="flex items-center gap-space-xs text-secondary font-label-caps text-label-caps uppercase tracking-wider font-bold">
+                <span class="material-symbols-outlined text-[18px]">shield</span> Student Safety Protocol
+              </div>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface font-extrabold tracking-tight">
+                Recommended Actions for Candidates
+              </h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant">
+                Follow these four institutional defense steps to protect your finances, identity, and university reputation.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+              <!-- Step 1 -->
+              <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md border border-outline-variant/30 group">
+                <div class="flex flex-col gap-space-sm">
+                  <div class="w-12 h-12 rounded-xl bg-error-container text-on-error-container flex items-center justify-center font-bold text-headline-sm">
+                    1
+                  </div>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                    Never Pay Any Amount
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    Block and report the UPI ID on Google Pay/PhonePe immediately. Legitimate organizations absorb all onboarding and equipment costs.
+                  </p>
+                </div>
+                <div class="pt-space-xs">
+                  <span class="inline-flex items-center gap-1 font-label-caps text-label-caps text-error font-bold">
+                    <span class="material-symbols-outlined text-[15px]">block</span> ZERO TOLERANCE
+                  </span>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md border border-outline-variant/30 group">
+                <div class="flex flex-col gap-space-sm">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-bold text-headline-sm">
+                    2
+                  </div>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                    Verify MCA & LinkedIn
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    Search the Ministry of Corporate Affairs (<span class="font-mono text-xs">mca.gov.in</span>) for company CIN and verify current employees on LinkedIn.
+                  </p>
+                </div>
+                <div class="pt-space-xs">
+                  <a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold hover:underline" href="https://www.mca.gov.in" rel="noopener noreferrer" target="_blank">
+                    Open MCA Directory <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md border border-outline-variant/30 group">
+                <div class="flex flex-col gap-space-sm">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-bold text-headline-sm">
+                    3
+                  </div>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                    Check Official Careers Page
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    Navigate independently to the company’s official web portal. Never rely exclusively on forwarded messages, free forms, or cloud drive files.
+                  </p>
+                </div>
+                <div class="pt-space-xs">
+                  <span class="inline-flex items-center gap-1 font-label-caps text-label-caps text-on-surface-variant font-semibold">
+                    <span class="material-symbols-outlined text-[15px]">domain</span> CHECK SSL DOMAIN
+                  </span>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="bg-surface-container-lowest p-space-lg rounded-2xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-space-md border border-outline-variant/30 group">
+                <div class="flex flex-col gap-space-sm">
+                  <div class="w-12 h-12 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-bold text-headline-sm">
+                    4
+                  </div>
+                  <h3 class="font-title-md text-title-md text-on-surface font-bold group-hover:text-primary transition-colors">
+                    Alert Cyber Crime & TPO
+                  </h3>
+                  <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                    Report the recruiter phone number and UPI handle to the National Cyber Crime portal (1930) and your college Training & Placement cell.
+                  </p>
+                </div>
+                <div class="pt-space-xs">
+                  <a class="inline-flex items-center gap-1 font-label-md text-label-md text-primary font-semibold hover:underline" href="https://cybercrime.gov.in" rel="noopener noreferrer" target="_blank">
+                    cybercrime.gov.in <span class="material-symbols-outlined text-[14px]">open_in_new</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Honest Institutional Alert Banner (Replaces fake student count) -->
+          <section class="w-full bg-gradient-to-r from-primary-container to-primary text-on-primary rounded-2xl p-space-xl shadow-lg relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-space-lg">
+            <div class="flex items-center gap-space-lg relative z-10">
+              <div class="w-16 h-16 rounded-2xl bg-on-primary/10 backdrop-blur-md flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-on-primary text-[36px]">campaign</span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <span class="font-label-caps text-label-caps text-primary-fixed uppercase tracking-wider font-bold">Community Safety Notice</span>
+                <h3 class="font-headline-sm text-headline-sm text-on-primary font-bold">Help Protect Your College Classmates</h3>
+                <p class="font-body-md text-body-md text-primary-fixed font-normal max-w-xl">
+                  Share verified alerts with your university WhatsApp or Telegram groups. Reporting suspicious UPI IDs safeguards fellow students from advance-fee fraud.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-space-sm shrink-0 relative z-10 w-full md:w-auto">
+              <a href="https://cybercrime.gov.in" target="_blank" rel="noopener" class="w-full md:w-auto px-space-lg py-3 rounded-lg bg-surface-container-lowest text-primary font-label-lg text-label-lg font-bold shadow-md hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">report</span>
+                Report Scam to CyberCell
+              </a>
+            </div>
+          </section>
+
+          <!-- Persistent Bottom Action Bar -->
+          <section class="sticky bottom-4 z-40 w-full bg-surface-container-lowest/95 backdrop-blur-xl p-space-md rounded-2xl shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-space-md border border-outline-variant/30">
+            <div class="flex items-center gap-space-sm w-full sm:w-auto">
+              <span id="footerVerdictIcon" class="material-symbols-outlined text-error text-[24px]">gpp_maybe</span>
+              <div class="flex flex-col">
+                <span id="footerVerdictTitle" class="font-label-lg text-label-lg text-on-surface font-bold leading-tight">
+                  Verdict: High Risk Job Scam
+                </span>
+                <span id="footerVerdictSub" class="font-body-sm text-body-sm text-on-surface-variant">
+                  Recommended Action: Cease all communication & do not pay
+                </span>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-space-sm w-full sm:w-auto justify-end">
+              <!-- Download PDF Button -->
+              <button class="px-space-md py-2.5 rounded-lg bg-surface-container-low text-on-surface hover:bg-surface-container hover:text-primary transition-all font-label-lg text-label-lg flex items-center gap-2 cursor-pointer" id="downloadPdfBtn">
+                <span class="material-symbols-outlined text-[18px]">download</span>
+                <span class="hidden md:inline">Download</span> PDF Report
+              </button>
+
+              <!-- WhatsApp / Share Warning Button -->
+              <button class="px-space-md py-2.5 rounded-lg bg-secondary-container text-on-secondary-container hover:brightness-95 transition-all font-label-lg text-label-lg font-bold flex items-center gap-2 cursor-pointer" id="shareWarningBtn">
+                <span class="material-symbols-outlined text-[18px]">share</span>
+                Share Warning ↗
+              </button>
+
+              <!-- Primary Inspect Another Offer Button -->
+              <a class="px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary transition-all font-label-lg text-label-lg font-bold flex items-center gap-2 shadow-md shadow-primary/20" href="/">
+                <span class="material-symbols-outlined text-[18px]">search_check</span>
+                Check Another Offer
+              </a>
+            </div>
+          </section>
+
+          <!-- Toast Notification -->
+          <div class="fixed bottom-24 right-8 z-50 bg-inverse-surface text-inverse-on-surface px-space-lg py-3 rounded-xl shadow-xl flex items-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-none" id="toastMessage">
+            <span class="material-symbols-outlined text-secondary-fixed text-[20px]">check_circle</span>
+            <span class="font-body-md text-body-md" id="toastText">Link copied to clipboard! Share with classmates.</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.03)] border-t border-outline-variant/30">
+    <div class="max-w-7xl mx-auto px-margin py-space-xl flex flex-col md:flex-row items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-sm text-center md:text-left">
+        <span class="material-symbols-outlined text-secondary text-[20px]">security</span>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+          Free student community initiative • No data or message content ever stored
+        </p>
+      </div>
+      <div class="flex items-center gap-space-lg">
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="https://cybercrime.gov.in" target="_blank" rel="noopener">Safety Guidelines</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="https://www.mca.gov.in" target="_blank" rel="noopener">MCA Verification</a>
+        <span class="font-label-caps text-label-caps text-outline">InternSafe India</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DYNAMIC RENDERING SCRIPT -->
+  <script>
+    // 1. Read the analysis result from sessionStorage
+    const storedData = sessionStorage.getItem('internsafe_result');
+    let analysis = null;
+
+    if (storedData) {
+      try {
+        analysis = JSON.parse(storedData);
+      } catch (e) {
+        console.error("Could not parse stored analysis:", e);
+      }
+    }
+
+    // Fallback data in case user navigated directly to /result without analyzing first
+    if (!analysis) {
+      analysis = {
+        risk_score: 88,
+        label: "Likely Scam",
+        summary: "Multiple high-severity red flags detected typical of fee-for-offer scams targeting college graduates.",
+        company_name: "TechGlobal Innovations Private Ltd",
+        sender_email: "techglobalsolutions.hr@gmail.com",
+        metrics: {
+          stipend: "₹35,000 / mo",
+          fee: "₹1,499 (UPI)",
+          recruiter_origin: "Personal Gmail"
+        },
+        red_flags: [
+          {
+            id: "REGISTRATION_FEE",
+            title: "Demands upfront refundable security fee (₹1,499)",
+            severity: "high",
+            matched_phrase: "Pay refundable processing amount of Rs. 1499 to UPI: hr.onboard@paytm",
+            explanation: "Legitimate Indian corporations and startups never charge candidates for application screening, identity badges, laptop security, or training induction kits."
+          },
+          {
+            id: "FREE_EMAIL_DOMAIN",
+            title: "Recruiter communicates via public free mail account",
+            severity: "high",
+            matched_phrase: "Sent from techglobalsolutions.hr@gmail.com",
+            explanation: "Official recruiters contact students solely through authorized corporate domains (@company.com). Fraudsters rely on throwaway Gmail or Outlook handles."
+          },
+          {
+            id: "INSTANT_SELECTION",
+            title: "Guaranteed immediate appointment with zero technical evaluation",
+            severity: "medium",
+            matched_phrase: "Based on your resume shortlist, you are directly selected",
+            explanation: "Direct job letters issued solely upon CV upload without recorded telephonic screenings or coding rounds correlate over 85% with coordinated fee syndicates."
+          },
+          {
+            id: "INFORMAL_MESSAGING",
+            title: "Onboarding exclusively driven via WhatsApp and Telegram",
+            severity: "medium",
+            matched_phrase: "Send payment screenshot on WhatsApp",
+            explanation: "Legitimate enterprise hiring workflows dispatch authenticated letters via encrypted portal URLs and official HRMS applications."
+          }
+        ],
+        original_text: `Dear Candidate,
+
+Congratulations! We reviewed your profile on Naukri/LinkedIn. 
+“Based on your resume shortlist, you are directly selected” for the post of Remote Data Research Analyst at TechGlobal Innovations Pvt Ltd.
+
+Monthly Stipend: INR 35,000 + Laptop Allowance. Work from Home (Flexible 4 hrs/day).
+
+To confirm your joining kit dispatch and formal NDA documentation, kindly “Pay refundable processing amount of Rs. 1499 to UPI: hr.onboard@paytm” within 6 hours. Amount refunded in 1st month salary.
+
+Send payment screenshot back on this WhatsApp or reply to: “techglobalsolutions.hr@gmail.com”
+
+Warm Regards,
+Rohit Malhotra | HR Operations`
+      };
+    }
+
+    // 2. Populate Header & Case Info
+    const caseId = 'CASE-#IN-' + Math.floor(10000 + Math.random() * 90000);
+    document.getElementById('caseIdDisplay').textContent = caseId;
+    document.getElementById('companyNameDisplay').textContent = analysis.company_name || 'Unspecified Entity';
+
+    // Verification Stamp
+    const originDesc = (analysis.metrics && analysis.metrics.recruiter_origin) ? analysis.metrics.recruiter_origin : 'Web Scan';
+    document.getElementById('verificationStampText').textContent = `Scanned just now • Channel: ${originDesc}`;
+
+    // 3. Render Gauge & Score
+    const score = Math.max(0, Math.min(100, analysis.risk_score || 0));
+    document.getElementById('scoreNumber').textContent = score;
+
+    // SVG Radial Meter: Circumference = 2 * PI * 50 = 314.159
+    const circumference = 314.159;
+    const offset = circumference * (1 - (score / 100));
+    const meterCircle = document.getElementById('meterCircle');
+    setTimeout(() => {
+      meterCircle.style.strokeDashoffset = offset;
+    }, 100);
+
+    // Color theme configuration based on score/verdict
+    const gaugeContainer = document.getElementById('gaugeContainer');
+    const entityBadge = document.getElementById('entityBadge');
+    const verdictPill = document.getElementById('verdictPill');
+    const verdictIcon = document.getElementById('verdictIcon');
+    const verdictText = document.getElementById('verdictText');
+    const meterRiskLabel = document.getElementById('meterRiskLabel');
+    const scoreNumber = document.getElementById('scoreNumber');
+    const ambientGlow = document.getElementById('ambientGlow');
+    const calloutStrip = document.getElementById('calloutStrip');
+    const calloutIcon = document.getElementById('calloutIcon');
+    const calloutTitle = document.getElementById('calloutTitle');
+    const calloutDesc = document.getElementById('calloutDesc');
+    const footerVerdictIcon = document.getElementById('footerVerdictIcon');
+    const footerVerdictTitle = document.getElementById('footerVerdictTitle');
+    const footerVerdictSub = document.getElementById('footerVerdictSub');
+
+    if (score >= 60) {
+      // High Risk / Scam
+      gaugeContainer.className = "lg:col-span-4 p-space-xl bg-error-container/20 flex flex-col items-center justify-center text-center relative";
+      meterCircle.setAttribute('class', 'text-error transition-all duration-1000 ease-out');
+      scoreNumber.className = "font-display-lg text-display-lg text-error font-extrabold leading-none tracking-tighter";
+      meterRiskLabel.className = "font-label-caps text-label-caps text-error font-bold uppercase tracking-widest";
+      
+      verdictPill.className = "mt-2 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-error text-on-error font-label-caps text-label-caps tracking-wider font-bold shadow-md shadow-error/20";
+      verdictIcon.textContent = "gpp_bad";
+      verdictText.textContent = "LIKELY SCAM (HIGH RISK)";
+      
+      entityBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-caps text-label-caps font-bold";
+      entityBadge.innerHTML = `<span class="material-symbols-outlined text-[14px]">warning</span>UNVERIFIED / HIGH RISK`;
+
+      ambientGlow.className = "pointer-events-none absolute top-0 right-1/4 h-96 w-96 rounded-full bg-error/10 blur-3xl";
+
+      footerVerdictIcon.className = "material-symbols-outlined text-error text-[24px]";
+      footerVerdictTitle.textContent = "Verdict: Likely Employment Scam";
+      footerVerdictSub.textContent = "Recommended Action: Cease all contact & do not transfer funds";
+
+    } else if (score >= 25) {
+      // Medium Risk / Suspicious
+      gaugeContainer.className = "lg:col-span-4 p-space-xl bg-amber-50 flex flex-col items-center justify-center text-center relative";
+      meterCircle.setAttribute('class', 'text-amber-500 transition-all duration-1000 ease-out');
+      scoreNumber.className = "font-display-lg text-display-lg text-amber-700 font-extrabold leading-none tracking-tighter";
+      meterRiskLabel.className = "font-label-caps text-label-caps text-amber-700 font-bold uppercase tracking-widest";
+
+      verdictPill.className = "mt-2 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-600 text-white font-label-caps text-label-caps tracking-wider font-bold shadow-md shadow-amber-600/20";
+      verdictIcon.textContent = "gpp_maybe";
+      verdictText.textContent = "SUSPICIOUS (MEDIUM RISK)";
+
+      entityBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-label-caps text-label-caps font-bold";
+      entityBadge.innerHTML = `<span class="material-symbols-outlined text-[14px]">help</span>ANOMALIES DETECTED`;
+
+      ambientGlow.className = "pointer-events-none absolute top-0 right-1/4 h-96 w-96 rounded-full bg-amber-400/10 blur-3xl";
+
+      calloutStrip.className = "bg-amber-100/60 rounded-xl p-space-md flex items-start gap-space-md border border-amber-300";
+      calloutIcon.className = "material-symbols-outlined text-amber-700 text-[24px] mt-0.5";
+      calloutIcon.textContent = "warning";
+      calloutTitle.className = "font-label-lg text-label-lg text-amber-900 font-bold";
+      calloutTitle.textContent = "Exercise Caution Before Sharing Documents";
+      calloutDesc.textContent = "Verify recruiter identity on LinkedIn and ensure the company domain matches official incorporation records.";
+
+      footerVerdictIcon.className = "material-symbols-outlined text-amber-600 text-[24px]";
+      footerVerdictTitle.textContent = "Verdict: Suspicious Recruitment Communication";
+      footerVerdictSub.textContent = "Recommended Action: Request official company email verification";
+
+    } else {
+      // Low Risk / Safe
+      gaugeContainer.className = "lg:col-span-4 p-space-xl bg-secondary-container/20 flex flex-col items-center justify-center text-center relative";
+      meterCircle.setAttribute('class', 'text-secondary transition-all duration-1000 ease-out');
+      scoreNumber.className = "font-display-lg text-display-lg text-secondary font-extrabold leading-none tracking-tighter";
+      meterRiskLabel.className = "font-label-caps text-label-caps text-secondary font-bold uppercase tracking-widest";
+
+      verdictPill.className = "mt-2 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-secondary text-on-secondary font-label-caps text-label-caps tracking-wider font-bold shadow-md shadow-secondary/20";
+      verdictIcon.textContent = "verified_user";
+      verdictText.textContent = "SAFE OFFER (LOW RISK)";
+
+      entityBadge.className = "inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps font-bold";
+      entityBadge.innerHTML = `<span class="material-symbols-outlined text-[14px]">check_circle</span>STANDARD PATTERNS`;
+
+      ambientGlow.className = "pointer-events-none absolute top-0 right-1/4 h-96 w-96 rounded-full bg-secondary/10 blur-3xl";
+
+      calloutStrip.className = "bg-secondary-container/30 rounded-xl p-space-md flex items-start gap-space-md border border-secondary-container";
+      calloutIcon.className = "material-symbols-outlined text-secondary text-[24px] mt-0.5";
+      calloutIcon.textContent = "check_circle";
+      calloutTitle.className = "font-label-lg text-label-lg text-on-secondary-container font-bold";
+      calloutTitle.textContent = "No Obvious Scam Flags Found";
+      calloutDesc.textContent = "The offer reflects standard corporate recruitment patterns. Remember: real companies will never ask for payment later during onboarding.";
+
+      footerVerdictIcon.className = "material-symbols-outlined text-secondary text-[24px]";
+      footerVerdictTitle.textContent = "Verdict: Low Risk Offer";
+      footerVerdictSub.textContent = "Recommended Action: Proceed with standard employment contract review";
+    }
+
+    // 4. Headline & Narrative
+    document.getElementById('verdictHeadline').textContent = 
+      score >= 60 ? "Multiple high-severity red flags detected typical of fee-for-offer scams targeting college graduates."
+      : (score >= 25 ? "Suspicious signals detected in offer communication. Caution strongly advised."
+      : "No known scam patterns detected. The offer text aligns with standard internship practices.");
+
+    document.getElementById('verdictSummary').textContent = analysis.summary || "";
+
+    // 5. Populate Metrics
+    const metrics = analysis.metrics || {};
+    document.getElementById('metricStipend').textContent = metrics.stipend || "Not Specified";
+    document.getElementById('metricFee').textContent = metrics.fee || "None Detected";
+    document.getElementById('metricOrigin').textContent = metrics.recruiter_origin || "Unverified";
+
+    // Style the Fee Card depending on whether a fee was detected
+    const feeMetricCard = document.getElementById('feeMetricCard');
+    if (metrics.fee && metrics.fee !== "None Detected") {
+      feeMetricCard.className = "bg-error-container/30 p-space-md rounded-xl flex flex-col gap-1 border border-error-container";
+    } else {
+      feeMetricCard.className = "bg-surface-container-low p-space-md rounded-xl flex flex-col gap-1 border border-outline-variant/20";
+      feeMetricCard.querySelector('span:first-child').className = "font-label-caps text-label-caps text-on-surface-variant font-bold";
+      document.getElementById('metricFee').className = "font-title-md text-title-md text-on-surface font-bold";
+      document.getElementById('metricFeeSub').className = "font-body-sm text-body-sm text-secondary font-medium";
+      document.getElementById('metricFeeSub').textContent = "Zero fee demand detected";
+    }
+
+    // 6. Populate Red Flags Cards
+    const flagsContainer = document.getElementById('redFlagsContainer');
+    const redFlags = analysis.red_flags || [];
+    document.getElementById('flagCountBadge').textContent = `${redFlags.length} Criteria Flagged`;
+
+    if (redFlags.length === 0) {
+      document.getElementById('flagsHeaderTitle').textContent = "Safety Verification Checklist";
+      document.getElementById('flagSectionIcon').textContent = "check_circle";
+      document.getElementById('flagSectionIcon').className = "material-symbols-outlined text-secondary text-[22px]";
+
+      flagsContainer.innerHTML = `
+        <article class="bg-surface-container-lowest rounded-xl p-space-lg shadow-sm border border-secondary/30 relative overflow-hidden">
+          <div class="absolute left-0 top-0 bottom-0 w-1.5 bg-secondary"></div>
+          <div class="flex flex-col gap-space-sm pl-1">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-space-xs text-secondary">
+                <span class="material-symbols-outlined text-[20px]">verified</span>
+                <span class="font-label-caps text-label-caps font-extrabold uppercase">Clear of Common Scam Patterns</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps font-bold">Standard Offer</span>
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface font-bold">No High-Risk Violation Signatures</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              InternSafe did not find upfront fee demands, throwaway personal email handles, direct appointment traps, or artificial deadlines in the provided text.
+            </p>
+            <div class="mt-space-xs bg-surface-container-low rounded-lg p-space-sm flex items-center gap-space-xs text-on-surface-variant text-xs">
+              <span class="material-symbols-outlined text-secondary text-[18px]">info</span>
+              <span>Best Practice: Confirm the company's registration on the Ministry of Corporate Affairs (MCA) portal before signing.</span>
+            </div>
+          </div>
+        </article>
+      `;
+    } else {
+      flagsContainer.innerHTML = "";
+      redFlags.forEach((flag, idx) => {
+        const isHigh = flag.severity === 'high';
+        const borderColor = isHigh ? 'bg-error' : 'bg-tertiary';
+        const iconColor = isHigh ? 'text-error' : 'text-tertiary';
+        const badgeBg = isHigh ? 'bg-error-container text-on-error-container' : 'bg-tertiary-fixed text-on-tertiary-fixed';
+        const quoteBg = isHigh ? 'bg-error-container/30' : 'bg-surface-container-high';
+        const quoteIconColor = isHigh ? 'text-error' : 'text-tertiary';
+        const severityLabel = isHigh ? 'High Severity Violation' : 'Medium Severity Anomaly';
+        const iconName = flag.id === 'REGISTRATION_FEE' ? 'payments' 
+                       : (flag.id === 'FREE_EMAIL_DOMAIN' ? 'mail' 
+                       : (flag.id === 'INSTANT_SELECTION' ? 'bolt'
+                       : (flag.id === 'INFORMAL_MESSAGING' ? 'chat'
+                       : (flag.id === 'UNREALISTIC_STIPEND' ? 'trending_up' : 'alarm'))));
+
+        const card = document.createElement('article');
+        card.className = "bg-surface-container-lowest rounded-xl p-space-lg shadow-sm hover:shadow-md transition-shadow relative overflow-hidden border border-outline-variant/30";
+        card.innerHTML = `
+          <div class="absolute left-0 top-0 bottom-0 w-1.5 ${borderColor}"></div>
+          <div class="flex flex-col gap-space-sm pl-1">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-space-xs ${iconColor}">
+                <span class="material-symbols-outlined text-[20px]">${iconName}</span>
+                <span class="font-label-caps text-label-caps font-extrabold uppercase">${severityLabel}</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full ${badgeBg} font-label-caps text-label-caps font-bold">
+                ${flag.id.replace('_', ' ')}
+              </span>
+            </div>
+            <h3 class="font-title-md text-title-md text-on-surface font-bold">${escapeHtml(flag.title)}</h3>
+            <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+              ${escapeHtml(flag.explanation)}
+            </p>
+            ${flag.matched_phrase ? `
+              <div class="mt-space-xs ${quoteBg} rounded-lg p-space-sm flex items-center gap-space-xs">
+                <span class="material-symbols-outlined ${quoteIconColor} text-[18px]">format_quote</span>
+                <span class="font-body-sm text-body-sm text-on-surface font-mono">Matched: “${escapeHtml(flag.matched_phrase)}”</span>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        flagsContainer.appendChild(card);
+      });
+    }
+
+    // 7. Evidence Audit: Show original text with highlights
+    const evidenceStream = document.getElementById('evidenceContentStream');
+    const originalText = analysis.original_text || "";
+    
+    // Simple HTML escaping helper
+    function escapeHtml(text) {
+      if (!text) return "";
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Highlight matched phrases in the evidence box
+    let annotatedHtml = escapeHtml(originalText);
+    redFlags.forEach(flag => {
+      if (flag.matched_phrase) {
+        // Strip out leading/trailing ellipsis for regex matching
+        let cleanSnippet = flag.matched_phrase.replace(/^\.\.\.|\.\.\.$/g, '').trim();
+        if (cleanSnippet.length > 5) {
+          const escapedSnippet = cleanSnippet.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+          const highlightClass = flag.severity === 'high' 
+            ? 'bg-red-200 text-error font-extrabold px-1 py-0.5 rounded cursor-help shadow-sm'
+            : 'bg-amber-200 text-amber-900 font-bold px-1 py-0.5 rounded cursor-help shadow-sm';
+          
+          try {
+            const regex = new RegExp(`(${escapedSnippet})`, 'gi');
+            annotatedHtml = annotatedHtml.replace(regex, `<mark class="${highlightClass}" title="${escapeHtml(flag.title)}">$1</mark>`);
+          } catch(e) {}
+        }
+      }
+    });
+    evidenceStream.innerHTML = annotatedHtml || "<p class='text-on-surface-variant italic'>No original text recorded.</p>";
+
+    // Generate short session digest string
+    const digestHash = Math.abs(hashCode(originalText)).toString(16).padEnd(8, '0').slice(0, 8);
+    document.getElementById('textDigest').textContent = `${digestHash.slice(0, 4)}...${digestHash.slice(4)}`;
+
+    function hashCode(str) {
+      let hash = 0;
+      for (let i = 0; i < str.length; i++) {
+        hash = ((hash << 5) - hash) + str.charCodeAt(i);
+        hash |= 0;
+      }
+      return hash;
+    }
+
+    // 8. Interactive Actions: Share & Download PDF
+    const shareBtn = document.getElementById('shareWarningBtn');
+    const downloadBtn = document.getElementById('downloadPdfBtn');
+    const toast = document.getElementById('toastMessage');
+    const toastText = document.getElementById('toastText');
+
+    function showToast(message) {
+      if (!toast) return;
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    if (shareBtn) {
+      shareBtn.addEventListener('click', () => {
+        const company = analysis.company_name || "Unverified Company";
+        const shareMsg = `⚠️ Job Fraud Warning from InternSafe:\nI verified an offer from "${company}" (Risk Score: ${score}/100 - ${analysis.label}).\nDo not pay any deposit or security fee! Verify any offer on https://internsafe.in`;
+        
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(shareMsg);
+          showToast("Scam warning copied! Paste directly in your college WhatsApp group.");
+        } else {
+          showToast("Share warning prepared for university student groups.");
+        }
+      });
+    }
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', () => {
+        showToast("Preparing evidence report for printing...");
+        setTimeout(() => {
+          window.print();
+        }, 500);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>InternSafe - Fake Internship & Job Offer Detector for Indian Students</title>
+  
+  <!-- Google Fonts: Material Symbols & Inter -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+  
+  <!-- Base styling -->
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+      main > :first-child { margin-top: 0 !important; }
+      main > :last-child { margin-bottom: 0 !important; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary-fixed-dim": "#c3c0ff",
+            "on-tertiary-container": "#ffd4a4",
+            "on-background": "#131b2e",
+            "primary-fixed": "#e2dfff",
+            "on-tertiary-fixed-variant": "#653e00",
+            "primary-container": "#4f46e5",
+            "secondary-container": "#6cf8bb",
+            "surface-container-highest": "#dae2fd",
+            "surface-tint": "#4d44e3",
+            "on-secondary-fixed": "#002113",
+            "tertiary": "#684000",
+            "secondary": "#006c49",
+            "background": "#faf8ff",
+            "on-primary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed-variant": "#005236",
+            "on-primary-fixed-variant": "#3323cc",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#eaedff",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "secondary-fixed": "#6ffbbe",
+            "on-surface": "#131b2e",
+            "tertiary-container": "#885500",
+            "tertiary-fixed-dim": "#ffb95f",
+            "inverse-surface": "#283044",
+            "on-primary-fixed": "#0f0069",
+            "surface-dim": "#d2d9f4",
+            "surface": "#faf8ff",
+            "on-error": "#ffffff",
+            "on-primary-container": "#dad7ff",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#e2e7ff",
+            "inverse-on-surface": "#eef0ff",
+            "error": "#ba1a1a",
+            "surface-bright": "#faf8ff",
+            "surface-variant": "#dae2fd",
+            "on-surface-variant": "#464555",
+            "tertiary-fixed": "#ffddb8",
+            "secondary-fixed-dim": "#4edea3",
+            "inverse-primary": "#c3c0ff",
+            "outline": "#777587",
+            "outline-variant": "#c7c4d8",
+            "primary": "#3525cd",
+            "on-secondary-container": "#00714d",
+            "surface-container-low": "#f2f3ff",
+            "on-tertiary-fixed": "#2a1700"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "margin": "2rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-2xl": "3rem"
+          },
+          fontFamily: {
+            "body-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "label-lg": ["Inter"],
+            "label-caps": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "display-lg-mobile": ["Inter"],
+            "title-md": ["Inter"],
+            "display-lg": ["Inter"],
+            "headline-lg-mobile": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-screen flex flex-col justify-between">
+  <!-- Top Navigation Header -->
+  <header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 max-w-7xl mx-auto px-margin flex items-center justify-between">
+      <div class="flex items-center gap-space-md">
+        <!-- Brand Icon / Shield -->
+        <a href="/" class="flex items-center gap-space-xs cursor-pointer group">
+          <div class="w-9 h-9 rounded-xl bg-primary-container text-on-primary flex items-center justify-center font-bold shadow-sm group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[22px]">shield</span>
+          </div>
+          <span class="font-title-md text-title-md text-primary font-bold">InternSafe</span>
+        </a>
+        <span class="hidden sm:inline-flex items-center gap-space-xs px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-caps text-label-caps font-bold">
+          <span class="material-symbols-outlined text-[14px]">verified_user</span>INDIA
+        </span>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-space-xs">
+        <a aria-current="page" class="px-space-md py-space-sm rounded-lg transition-colors bg-primary-container text-on-primary font-label-lg font-semibold" href="/">Analyzer</a>
+        <a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#tips">Scam Tips</a>
+        <a class="px-space-md py-space-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" href="#how-it-works">How It Works</a>
+      </nav>
+
+      <div class="flex items-center gap-space-md">
+        <div class="hidden lg:flex items-center gap-space-xs px-space-md py-1 rounded-full bg-surface-container-low border border-outline-variant/40">
+          <span class="material-symbols-outlined text-secondary text-[16px]">school</span>
+          <span class="font-label-md text-label-md text-on-surface-variant font-medium">Student Protection Initiative</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="w-full pt-20 pb-16 bg-surface flex-grow">
+    <div class="relative w-full overflow-hidden bg-gradient-to-b from-surface-container-high/40 via-surface to-surface">
+      <!-- Decorative Ambient Glows -->
+      <div class="pointer-events-none absolute top-0 right-1/4 h-96 w-96 rounded-full bg-primary/5 blur-3xl"></div>
+      <div class="pointer-events-none absolute top-32 left-10 h-72 w-72 rounded-full bg-secondary/5 blur-2xl"></div>
+
+      <div class="max-w-5xl mx-auto px-margin-mobile md:px-margin pt-space-lg flex flex-col gap-space-xl relative">
+        
+        <!-- Hero Header -->
+        <div class="text-center flex flex-col items-center gap-space-sm max-w-3xl mx-auto">
+          <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-caps text-label-caps tracking-wider font-bold">
+            <span class="material-symbols-outlined text-[15px]">security</span>
+            RULE-BASED EMPLOYMENT FRAUD AUDITOR
+          </div>
+          <h1 class="font-headline-lg md:text-[38px] md:leading-[46px] text-headline-lg text-on-surface font-extrabold tracking-tight">
+            Verify Internship & Job Offers Before You Respond
+          </h1>
+          <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed max-w-2xl">
+            Protect your money, documents, and identity. Paste any offer letter, WhatsApp message, or email body. 
+            InternSafe scans for illegal fees, spoofed email domains, instant selection traps, and false stipends.
+          </p>
+        </div>
+
+        <!-- Analyzer Card Form -->
+        <div class="w-full bg-surface-container-lowest rounded-2xl shadow-xl border border-outline-variant/30 p-space-lg md:p-space-xl flex flex-col gap-space-lg relative">
+          
+          <!-- Sample Loaders Banner -->
+          <div class="bg-surface-container-low p-space-md rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm border border-outline-variant/20">
+            <div class="flex items-center gap-2 text-on-surface font-semibold text-sm">
+              <span class="material-symbols-outlined text-primary text-[20px]">smart_button</span>
+              <span>Quick Test with Examples:</span>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+              <button type="button" id="loadScamBtn" class="px-3 py-1.5 rounded-lg bg-error-container text-on-error-container hover:brightness-95 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-[14px]">warning</span>
+                Sample Scam (Fee + Gmail)
+              </button>
+              <button type="button" id="loadSuspiciousBtn" class="px-3 py-1.5 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed hover:brightness-95 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-[14px]">help</span>
+                Sample Suspicious (WhatsApp)
+              </button>
+              <button type="button" id="loadSafeBtn" class="px-3 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed hover:brightness-95 transition-all text-xs font-bold flex items-center gap-1.5 shadow-sm">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Sample Safe Offer
+              </button>
+            </div>
+          </div>
+
+          <!-- Main Analysis Form -->
+          <form id="analyzeForm" class="flex flex-col gap-space-lg">
+            
+            <!-- Offer Textarea -->
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <label for="offerText" class="font-label-lg text-label-lg font-bold text-on-surface flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-primary text-[18px]">description</span>
+                  Job / Internship Offer Content <span class="text-error">*</span>
+                </label>
+                <button type="button" id="clearBtn" class="text-xs text-on-surface-variant hover:text-error transition-colors flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[14px]">delete</span> Clear Text
+                </button>
+              </div>
+
+              <textarea 
+                id="offerText" 
+                name="offer_text" 
+                rows="8" 
+                required
+                placeholder="Paste the complete offer letter text, email body, or WhatsApp message here...&#10;&#10;Example:&#10;Dear Candidate, congratulations! You are directly selected for Data Analyst. Monthly stipend Rs 35,000. Kindly pay refundable processing fee of Rs 1499 to UPI: hr@paytm within 6 hours. Reply to hr.desk@gmail.com..."
+                class="w-full rounded-xl border border-outline-variant bg-surface-container-lowest p-space-md text-on-surface font-mono text-sm leading-relaxed focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-y"
+              ></textarea>
+              
+              <div class="flex items-center justify-between text-xs text-on-surface-variant">
+                <span>Supports plain text, email messages, and WhatsApp forwards</span>
+                <span id="charCount">0 characters</span>
+              </div>
+            </div>
+
+            <!-- Optional Metadata Fields (2-col grid) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+              <div class="flex flex-col gap-1.5">
+                <label for="companyName" class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-on-surface-variant">apartment</span>
+                  Claimed Company / Organization Name <span class="text-xs text-outline font-normal">(optional)</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="companyName" 
+                  name="company_name" 
+                  placeholder="e.g. TechGlobal Innovations Pvt Ltd"
+                  class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px- space-md py-2.5 text-on-surface text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+
+              <div class="flex flex-col gap-1.5">
+                <label for="senderEmail" class="font-label-md text-label-md font-semibold text-on-surface flex items-center gap-1">
+                  <span class="material-symbols-outlined text-[16px] text-on-surface-variant">mail</span>
+                  Recruiter Email or Phone Handle <span class="text-xs text-outline font-normal">(optional)</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="senderEmail" 
+                  name="sender_email" 
+                  placeholder="e.g. techglobalsolutions.hr@gmail.com"
+                  class="w-full rounded-lg border border-outline-variant bg-surface-container-lowest px-space-md py-2.5 text-on-surface text-sm focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                />
+              </div>
+            </div>
+
+            <!-- Error Banner (Hidden by default) -->
+            <div id="errorBanner" class="hidden bg-error-container text-on-error-container p-space-md rounded-xl text-sm font-medium flex items-center gap-2">
+              <span class="material-symbols-outlined text-error text-[20px]">error</span>
+              <span id="errorMessage">Please provide the offer letter text to analyze.</span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs">
+              <div class="flex items-center gap-2 text-xs text-on-surface-variant">
+                <span class="material-symbols-outlined text-secondary text-[18px]">lock</span>
+                <span>Privacy First: Analysis runs locally in your browser session. No data is stored.</span>
+              </div>
+
+              <button 
+                type="submit" 
+                id="submitBtn" 
+                class="w-full sm:w-auto px-space-xl py-3.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg font-bold shadow-lg shadow-primary-container/30 hover:bg-primary transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+              >
+                <span class="material-symbols-outlined text-[20px]" id="btnIcon">policy</span>
+                <span id="btnText">Analyze Offer for Red Flags</span>
+                <!-- Loading Spinner (Hidden by default) -->
+                <svg id="loadingSpinner" class="hidden animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Educational Highlights / Key Rules Grid -->
+        <section id="how-it-works" class="flex flex-col gap-space-md pt-space-lg">
+          <div class="flex items-center gap-space-xs text-primary font-label-caps text-label-caps uppercase tracking-wider font-bold">
+            <span class="material-symbols-outlined text-[18px]">shield</span> Safety Checklist
+          </div>
+          <h2 class="font-headline-sm text-headline-sm text-on-surface font-bold">
+            Top 4 Red Flags Targeting Indian Students
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+            <!-- Tip 1 -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/30 flex flex-col gap-2">
+              <div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[22px]">payments</span>
+              </div>
+              <h3 class="font-title-md text-title-md font-bold text-on-surface">Upfront Fee Demand</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Real companies never ask for registration, gate pass, ID card, or laptop courier money. Any fee is 100% fraud.
+              </p>
+            </div>
+
+            <!-- Tip 2 -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/30 flex flex-col gap-2">
+              <div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[22px]">mail</span>
+              </div>
+              <h3 class="font-title-md text-title-md font-bold text-on-surface">Free Email Providers</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                HR recruiters always write from official corporate domains (@company.com), never public Gmail or Yahoo accounts.
+              </p>
+            </div>
+
+            <!-- Tip 3 -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/30 flex flex-col gap-2">
+              <div class="w-10 h-10 rounded-lg bg-surface-container-high text-primary flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[22px]">chat</span>
+              </div>
+              <h3 class="font-title-md text-title-md font-bold text-on-surface">WhatsApp-Only Hiring</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Beware offers issued entirely on messaging apps without official HR portal access or corporate landlines.
+              </p>
+            </div>
+
+            <!-- Tip 4 -->
+            <div class="bg-surface-container-lowest p-space-lg rounded-xl border border-outline-variant/30 flex flex-col gap-2">
+              <div class="w-10 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold">
+                <span class="material-symbols-outlined text-[22px]">assignment_turned_in</span>
+              </div>
+              <h3 class="font-title-md text-title-md font-bold text-on-surface">No Interview Rounds</h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Instant selection without any technical screening or telephonic evaluation is typical of fee phishing syndicates.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface-container-lowest shadow-[0_-1px_6px_rgba(0,0,0,0.03)] border-t border-outline-variant/30">
+    <div class="max-w-7xl mx-auto px-margin py-space-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-sm text-center md:text-left">
+        <span class="material-symbols-outlined text-secondary text-[20px]">security</span>
+        <p class="font-body-sm text-body-sm text-on-surface-variant">
+          InternSafe India • Educational Student Safety Initiative • No personal data stored
+        </p>
+      </div>
+      <div class="flex items-center gap-space-lg">
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="https://cybercrime.gov.in" target="_blank" rel="noopener">National Cyber Crime (1930)</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="https://www.mca.gov.in" target="_blank" rel="noopener">MCA Verification</a>
+        <span class="font-label-caps text-label-caps text-outline">InternSafe</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Frontend Logic: Form handling, Sample Loaders, and Fetch Call to /analyze -->
+  <script>
+    const form = document.getElementById('analyzeForm');
+    const offerTextArea = document.getElementById('offerText');
+    const companyInput = document.getElementById('companyName');
+    const emailInput = document.getElementById('senderEmail');
+    const charCount = document.getElementById('charCount');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnIcon = document.getElementById('btnIcon');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorBanner = document.getElementById('errorBanner');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Preset Sample Offers for instant testing
+    const SAMPLES = {
+      scam: {
+        text: `Dear Candidate,
+
+Congratulations! We reviewed your profile on Naukri. Based on your resume shortlist, you are directly selected for the post of Remote Data Research Analyst at TechGlobal Innovations Pvt Ltd.
+
+Monthly Stipend: INR 35,000 + Laptop Allowance. Work from Home (Flexible 4 hrs/day).
+
+To confirm your joining kit dispatch and formal NDA documentation, kindly Pay refundable processing amount of Rs. 1499 to UPI: hr.onboard@paytm within 6 hours. Amount refunded in 1st month salary.
+
+Send payment screenshot back on WhatsApp or reply to: techglobalsolutions.hr@gmail.com
+
+Warm Regards,
+Rohit Malhotra | HR Operations`,
+        company: "TechGlobal Innovations Pvt Ltd",
+        email: "techglobalsolutions.hr@gmail.com"
+      },
+      suspicious: {
+        text: `Hello Student! Great opportunity for college freshers.
+Work from home part-time (2 hours per day) and earn Rs 40000 per month.
+Direct selection for online typing and data entry.
+Only 5 slots left for this week! Connect immediately on WhatsApp: +91 9876543210 to reserve your seat.`,
+        company: "Online Careers Network",
+        email: "careers-whatsapp@fastjob.me"
+      },
+      safe: {
+        text: `Dear Aditi,
+
+We are delighted to extend an offer for the position of Software Engineering Intern at TechVanguard Solutions Private Limited for a period of 6 months.
+
+Following your technical coding assessment and panel interview on December 2nd, the team was impressed by your problem-solving skills.
+You will receive a monthly stipend of Rs 18,000. 
+
+Please review the attached formal offer letter and non-disclosure agreement. Sign and return the scanned copies from your registered university email to admissions@techvanguard.in within 5 business days.
+
+Sincerely,
+Pooja Kulkarni
+Head of University Relations
+TechVanguard Solutions Pvt Ltd`,
+        company: "TechVanguard Solutions Private Limited",
+        email: "admissions@techvanguard.in"
+      }
+    };
+
+    // Update character counter
+    offerTextArea.addEventListener('input', () => {
+      charCount.textContent = `${offerTextArea.value.length} characters`;
+      hideError();
+    });
+
+    // Clear textarea
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      offerTextArea.value = '';
+      companyInput.value = '';
+      emailInput.value = '';
+      charCount.textContent = '0 characters';
+      hideError();
+    });
+
+    // Load sample buttons
+    document.getElementById('loadScamBtn').addEventListener('click', () => {
+      loadSample(SAMPLES.scam);
+    });
+    document.getElementById('loadSuspiciousBtn').addEventListener('click', () => {
+      loadSample(SAMPLES.suspicious);
+    });
+    document.getElementById('loadSafeBtn').addEventListener('click', () => {
+      loadSample(SAMPLES.safe);
+    });
+
+    function loadSample(sample) {
+      offerTextArea.value = sample.text;
+      companyInput.value = sample.company;
+      emailInput.value = sample.email;
+      charCount.textContent = `${sample.text.length} characters`;
+      hideError();
+    }
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorBanner.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorBanner.classList.add('hidden');
+    }
+
+    // Form Submission: sends text to POST /analyze with fetch
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideError();
+
+      const text = offerTextArea.value.trim();
+      const company = companyInput.value.trim();
+      const email = emailInput.value.trim();
+
+      if (!text) {
+        showError('Please paste the offer letter or message text before analyzing.');
+        return;
+      }
+
+      // Enter loading state
+      submitBtn.disabled = true;
+      btnText.textContent = 'Auditing Offer Signals...';
+      btnIcon.classList.add('hidden');
+      loadingSpinner.classList.remove('hidden');
+
+      try {
+        // Send request to Flask backend /analyze route
+        const response = await fetch('/analyze', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            offer_text: text,
+            company_name: company,
+            sender_email: email
+          })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          throw new Error(errData.error || 'Server returned an error while analyzing.');
+        }
+
+        const resultData = await response.json();
+
+        // Store analysis result in sessionStorage for result.html to render
+        sessionStorage.setItem('internsafe_result', JSON.stringify(resultData));
+
+        // Navigate to the result page
+        window.location.href = '/result';
+
+      } catch (err) {
+        console.error('Analysis error:', err);
+        showError(err.message || 'Unable to connect to the InternSafe analyzer. Please make sure the backend server is running.');
+      } finally {
+        // Restore button state
+        submitBtn.disabled = false;
+        btnText.textContent = 'Analyze Offer for Red Flags';
+        btnIcon.classList.remove('hidden');
+        loadingSpinner.classList.add('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
