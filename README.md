@@ -10,19 +10,8 @@ Paste a suspicious offer message. Get an instant risk score and a clear, explain
 ![Flask](https://img.shields.io/badge/Flask-Backend-000000?logo=flask&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Frontend-06B6D4?logo=tailwindcss&logoColor=white)
 ![Tests](https://img.shields.io/badge/Tests-6%2F6_passing-brightgreen)
-![License](https://img.shields.io/badge/License-MIT-blue)
 
 </div>
-
----
-
-## 📸 Screenshots
-
-| Analyzer | Result |
-|---|---|
-| ![Analyzer page](docs/screenshot-analyzer.png) | ![Result page](docs/screenshot-result.png) |
-
-> 💡 Add your screenshots to a `docs/` folder with the file names above.
 
 ---
 
@@ -109,11 +98,8 @@ internsafe/
 ### Prerequisites
 - Python 3.8 or higher
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/YOUR-USERNAME/internsafe.git
-cd internsafe
-```
+### 1. Get the code
+Clone or download this repository, then open a terminal inside the project folder.
 
 ### 2. Create and activate a virtual environment
 ```bash
@@ -170,18 +156,6 @@ The analyzer page has three sample buttons:
 - ⚠️ **Sample Suspicious:** a part-time WhatsApp typing job with an unrealistic stipend
 - ✅ **Sample Safe:** a genuine-style offer with a technical evaluation and corporate email
 
-### Evaluation on sample messages
-
-I also tested the tool on 10 hand-written messages (5 scam-style, 5 genuine-style).
-
-| Result | Count |
-|---|:---:|
-| Scam messages correctly flagged | _X / 5_ |
-| Genuine messages correctly marked safe | _X / 5_ |
-| False alarms | _X_ |
-
-> 📝 Replace the `X` values with your own results. Small, hand-made samples show how the rules behave, not real-world accuracy.
-
 ---
 
 ## 🔌 API Reference
@@ -237,7 +211,7 @@ Being upfront about what this project does *not* do:
 - **Keyword and regex matching** can produce false positives and false negatives.
 - **English-focused.** Messages in Hindi or Hinglish may not be detected well.
 - **No live verification.** It does not check company registration, domain age, or phone numbers online.
-- **Evaluated on a small sample set**, so accuracy claims should not be generalized.
+- **Tested on a small set of sample messages**, so accuracy should not be generalized.
 
 ## 🛣️ Roadmap
 
@@ -263,13 +237,6 @@ Being upfront about what this project does *not* do:
 
 **Arpan**
 B.Tech CSE (AI & ML), SGT University
-
-- GitHub: [@YOUR-USERNAME](https://github.com/YOUR-USERNAME)
-- LinkedIn: [your-profile](https://www.linkedin.com/in/YOUR-PROFILE)
-
-## 📄 License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
 
